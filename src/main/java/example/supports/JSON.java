@@ -16,6 +16,6 @@ public class JSON {
     }
 
     public static String dump(Videos videos) {
-        return null;
+        return videos.toString();
     }
 }
