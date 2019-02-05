@@ -10,8 +10,6 @@ import example.api.GoogleAuthorizer;
 import example.supports.JSONUtils;
 
 import java.time.LocalDate;
-import java.time.Period;
-import java.time.temporal.TemporalAmount;
 import java.util.Arrays;
 
 /*

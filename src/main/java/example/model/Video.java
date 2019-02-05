@@ -1,6 +1,9 @@
 package example.model;
 
+import example.model.supports.ViewCount;
 import lombok.*;
+
+import java.time.LocalDate;
 
 @EqualsAndHashCode
 @ToString
@@ -8,16 +11,34 @@ public class Video {
 
     @Getter
     private int id;
-    @Getter @Setter
-    private int viewCount;
+
+    private ViewCount viewCount;
+
     @Getter @Setter
     private double monthlyViewCount;
 
     @Builder
     public Video(int id, int viewCount, double monthlyViewCount) {
-        this.id = id;
-        this.viewCount = viewCount;
+        if(id <= 0) {
+            throw new IDException();
+        }
+        this.viewCount = ViewCount.of(viewCount);
         this.monthlyViewCount = monthlyViewCount;
     }
 
+    public double calculateMonthlyViewCount(LocalDate publishedAt) {
+        return getViewCount() * 365.0 / calculateDaysAvailable(publishedAt) / 12;
+    }
+
+    public int getViewCount() {
+        return viewCount.toInt();
+    }
+
+    public void setViewCount(int viewCount) {
+        this.viewCount = ViewCount.of(viewCount);
+    }
+
+    private long calculateDaysAvailable(LocalDate publishedAt) {
+        return LocalDate.now().minusDays(publishedAt.toEpochDay()).toEpochDay();
+    }
 }

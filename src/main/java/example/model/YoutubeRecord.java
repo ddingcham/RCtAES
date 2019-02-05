@@ -18,7 +18,7 @@ public class YoutubeRecord {
     @Builder
     private static YoutubeRecord of(int id, int viewCount, String dateTime, String formatter) {
         if (id <= 0) {
-            throw new IllegalArgumentException("id must be defined as positive");
+            throw new IDException();
         }
         return new YoutubeRecord(id, viewCount, dateTime, formatter);
     }
