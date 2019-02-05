@@ -10,6 +10,7 @@ import example.api.GoogleAuthorizer;
 import example.supports.JSONUtils;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.temporal.TemporalAmount;
 import java.util.Arrays;
 
@@ -29,7 +30,7 @@ public class VideoService {
                     Video video = videos.findById(youtubeID);
                     YoutubeRecord youtubeRecord = response.findById(youtubeID);
                     //TODO -> viewCount
-                    video.setViewCount(youtubeRecord.getStatistics().getViewCount().toInteger());
+                    video.setViewCount(youtubeRecord.getStatistics().getViewCount());
                     long daysAvailable = calculateDaysAvailable(youtubeRecord.getSnippet().getPublishedAt());
                     video.setMonthlyViewCount(video.getViewCount() * 365.0 / daysAvailable / 12);
                 });
@@ -41,8 +42,8 @@ public class VideoService {
         return JSONUtils.parseToVideos(FileUtils.read("videos.json"));
     }
 
-    public long calculateDaysAvailable(TemporalAmount publishedAt) {
-        return LocalDate.now().minus(publishedAt).toEpochDay();
+    public long calculateDaysAvailable(LocalDate publishedAt) {
+        return LocalDate.now().minusDays(publishedAt.toEpochDay()).toEpochDay();
     }
 
     public Response callYoutube(YoutubeIDs youtubeIDs) {

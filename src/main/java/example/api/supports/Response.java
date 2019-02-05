@@ -43,7 +43,7 @@ public class Response {
                 (id, record) -> videos
                         .addVideo(Video.builder()
                                 .id(record.getId())
-                                .viewCount(record.getStatistics().getViewCount().toInteger())
+                                .viewCount(record.getStatistics().getViewCount())
                                 .build()));
         return videos;
     }
