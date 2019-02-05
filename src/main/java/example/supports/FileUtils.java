@@ -1,6 +1,6 @@
 package example.supports;
 
-public class File {
+public class FileUtils {
     public static String read(String path){
         return null;
     }

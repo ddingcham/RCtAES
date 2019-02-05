@@ -1,6 +1,6 @@
 package example.api;
 
-import example.api.supports.OriginResponse;
+import example.api.supports.Request;
 import example.model.Youtube;
 
 public class Client {

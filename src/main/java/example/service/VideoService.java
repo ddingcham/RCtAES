@@ -2,21 +2,21 @@ package example.service;
 
 import example.api.Client;
 import example.api.supports.Parameters;
-import example.api.Request;
-import example.api.Response;
+import example.api.supports.Request;
+import example.api.supports.Response;
 import example.model.*;
-import example.supports.File;
-import example.api.supports.GoogleAuthorizer;
-import example.supports.JSON;
+import example.supports.FileUtils;
+import example.api.GoogleAuthorizer;
+import example.supports.JSONUtils;
 
 import java.time.LocalDate;
 import java.time.temporal.TemporalAmount;
 import java.util.Arrays;
 
 /*
-    The example code's job is to read some data about videos from a JSON file,
+    The example code's job is to read some data about videos from a JSONUtils file,
     enrich it with data from Youtube, calculate some simple further data,
-    and then return the data in JSON.
+    and then return the data in JSONUtils.
  */
 public class VideoService {
     public String getVideos() {
@@ -34,11 +34,11 @@ public class VideoService {
                     video.setMonthlyViewCount(video.getViewCount() * 365.0 / daysAvailable / 12);
                 });
 
-        return JSON.dump(videos);
+        return JSONUtils.dump(videos);
     }
 
     public Videos readVideoMeta() {
-        return JSON.parseToVideos(File.read("videos.json"));
+        return JSONUtils.parseToVideos(FileUtils.read("videos.json"));
     }
 
     public long calculateDaysAvailable(TemporalAmount publishedAt) {
@@ -62,6 +62,6 @@ public class VideoService {
                         .build())
                 .build();
 
-        return JSON.parseToResponse(client.execute(request).getBody());
+        return JSONUtils.parseToResponse(client.execute(request).getBody());
     }
 }

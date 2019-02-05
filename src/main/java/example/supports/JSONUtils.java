@@ -1,12 +1,9 @@
 package example.supports;
 
-import example.api.Response;
-import example.model.Video;
+import example.api.supports.Response;
 import example.model.Videos;
 
-import java.util.List;
-
-public class JSON {
+public class JSONUtils {
     public static Videos parseToVideos(String jsonString) {
         return null;
     }

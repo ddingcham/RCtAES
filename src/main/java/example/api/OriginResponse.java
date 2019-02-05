@@ -1,4 +1,4 @@
-package example.api.supports;
+package example.api;
 
 public class OriginResponse {
 

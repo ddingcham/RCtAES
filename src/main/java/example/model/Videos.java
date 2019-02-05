@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 @ToString
 public class Videos {
 
-    Map<Integer, Video> videos = new HashMap<Integer, Video>();
+    Map<Integer, Video> videos = new HashMap<>();
 
     public YoutubeIDs getVideoIDs() {
         return new YoutubeIDs(videos.keySet());

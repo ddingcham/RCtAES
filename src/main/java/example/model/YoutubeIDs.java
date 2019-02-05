@@ -13,7 +13,11 @@ public class YoutubeIDs {
     }
 
     public String join(String delim) {
-        return null;
+        StringBuilder result = new StringBuilder(IDs.get(0));
+        for (int id : IDs.subList(1, IDs.size())) {
+            result.append(delim + id);
+        }
+        return result.toString();
     }
 
     public Integer[] toArray() {

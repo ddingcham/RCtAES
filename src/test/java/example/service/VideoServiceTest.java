@@ -1,9 +1,9 @@
 package example.service;
 
-import example.api.Response;
+import example.api.supports.Response;
 import example.model.Video;
 import example.model.Videos;
-import example.supports.JSON;
+import example.supports.JSONUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,7 +39,7 @@ public class VideoServiceTest {
     }
 
     private String expectedVideos() {
-        return JSON.dump(fixturedVideos());
+        return JSONUtils.dump(fixturedVideos());
     }
 
     private Response stubCallYoutube() {
@@ -51,8 +51,6 @@ public class VideoServiceTest {
     }
 
     private Videos stubReadVideoMeta() {
-//        TODO
-//        return JSON.parseToVideos(File.read("test/data/youtube-video-list.json"));
         return fixturedVideos();
     }
 

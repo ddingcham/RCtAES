@@ -1,6 +1,5 @@
-package example.api.supports;
+package example.api;
 
-import example.api.Client;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
