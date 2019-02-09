@@ -33,8 +33,7 @@ public class VideoServiceTest {
         doReturn(stubCallYoutube())
                 .when(youtubeConnection)
                 .callYoutube(any());
-        videoService.setYoutubeConnection(youtubeConnection);
-        String actual = videoService.getVideos();
+        String actual = videoService.getVideos(youtubeConnection);
 
         System.out.println("actual(videos) : " + actual);
 

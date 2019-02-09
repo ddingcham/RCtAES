@@ -17,10 +17,7 @@ import java.util.Arrays;
  */
 public class VideoService {
 
-    @Setter
-    private YoutubeConnection youtubeConnection;
-
-    public String getVideos() {
+    public String getVideos(YoutubeConnection youtubeConnection) {
         Videos videos = readVideoMeta();
         YoutubeIDs youtubeIDs = videos.getVideoIDs();
         Response response = JSONUtils.parseToResponse(youtubeConnection.callYoutube(youtubeIDs));
