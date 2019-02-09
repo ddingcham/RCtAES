@@ -1,6 +1,6 @@
 package example.supports;
 
-import example.api.supports.Response;
+import example.external.supports.Response;
 import example.model.Videos;
 
 public class JSONUtils {

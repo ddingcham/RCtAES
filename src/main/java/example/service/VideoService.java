@@ -1,12 +1,9 @@
 package example.service;
 
-import example.api.Client;
-import example.api.supports.Parameters;
-import example.api.supports.Request;
-import example.api.supports.Response;
+import example.external.YoutubeConnection;
+import example.external.supports.Response;
 import example.model.*;
 import example.supports.FileUtils;
-import example.api.GoogleAuthorizer;
 import example.supports.JSONUtils;
 
 import java.time.LocalDate;
@@ -21,7 +18,7 @@ public class VideoService {
     public String getVideos() {
         Videos videos = readVideoMeta();
         YoutubeIDs youtubeIDs = videos.getVideoIDs();
-        Response response = callYoutube(youtubeIDs);
+        Response response = new YoutubeConnection().callYoutube(youtubeIDs);
 
         Arrays.stream(youtubeIDs.toArray())
                 .forEach(youtubeID -> {
@@ -42,25 +39,5 @@ public class VideoService {
 
     public long calculateDaysAvailable(LocalDate publishedAt) {
         return LocalDate.now().minusDays(publishedAt.toEpochDay()).toEpochDay();
-    }
-
-    public Response callYoutube(YoutubeIDs youtubeIDs) {
-        Client client = GoogleAuthorizer
-                .builder()
-                .tokenKey("api-youtube")
-                .applicationName("Gateway Youtube Example")
-                .applicationVersion("0.1")
-                .build();
-        Youtube youtube = client.discoveredApi("youtube", "v3");
-        Request request = Request
-                .builder()
-                .apiMethod(youtube.getVideoList())
-                .parameters(Parameters
-                        .with("id", youtubeIDs.join(","))
-                        .with("part", "snippet, contentDetails, statistics")
-                        .build())
-                .build();
-
-        return JSONUtils.parseToResponse(client.execute(request).getBody());
     }
 }

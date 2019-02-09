@@ -1,6 +1,7 @@
 package example.service;
 
-import example.api.supports.Response;
+import example.external.YoutubeConnection;
+import example.external.supports.Response;
 import example.model.Video;
 import example.model.Videos;
 import example.supports.JSONUtils;
@@ -13,10 +14,12 @@ import static org.mockito.Mockito.*;
 public class VideoServiceTest {
 
     VideoService videoService;
+    YoutubeConnection youtubeConnection;
 
     @Before
     public void setUp() {
         videoService = spy(VideoService.class);
+        youtubeConnection = mock(YoutubeConnection.class);
     }
 
     @Test
@@ -28,7 +31,7 @@ public class VideoServiceTest {
                 .when(videoService)
                 .calculateDaysAvailable(any());
         doReturn(stubCallYoutube())
-                .when(videoService)
+                .when(youtubeConnection)
                 .callYoutube(any());
         String actual = videoService.getVideos();
 
@@ -44,9 +47,9 @@ public class VideoServiceTest {
 
     private Response stubCallYoutube() {
         return Response.builder()
-                .with(0, 0)
-                .with(1, 1)
-                .with(2, 2)
+                .with(1, 0)
+                .with(2, 1)
+                .with(3, 2)
                 .build();
     }
 
@@ -57,17 +60,17 @@ public class VideoServiceTest {
     private Videos fixturedVideos() {
         Videos videos = new Videos();
         videos.addVideo(Video.builder()
-                .id(0)
+                .id(1)
                 .viewCount(0)
                 .monthlyViewCount(0)
                 .build());
         videos.addVideo(Video.builder()
-                .id(1)
+                .id(2)
                 .viewCount(1)
                 .monthlyViewCount(1 * 365.0 / 3L / 12)
                 .build());
         videos.addVideo(Video.builder()
-                .id(2)
+                .id(3)
                 .viewCount(2)
                 .monthlyViewCount(2 * 365.0 / 3L / 12)
                 .build());

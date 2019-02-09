@@ -1,4 +1,4 @@
-package example.api;
+package example.external;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

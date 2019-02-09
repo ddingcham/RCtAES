@@ -1,6 +1,6 @@
-package example.api;
+package example.external;
 
-import example.api.supports.Request;
+import example.external.supports.Request;
 import example.model.Youtube;
 
 public class Client {

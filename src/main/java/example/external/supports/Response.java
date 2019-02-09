@@ -1,4 +1,4 @@
-package example.api.supports;
+package example.external.supports;
 
 import example.model.Video;
 import example.model.Videos;

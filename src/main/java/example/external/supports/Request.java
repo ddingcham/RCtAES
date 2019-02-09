@@ -1,6 +1,5 @@
-package example.api.supports;
+package example.external.supports;
 
-import example.api.supports.Parameters;
 import example.model.Videos;
 import lombok.Builder;
 
