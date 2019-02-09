@@ -59,7 +59,7 @@ public class Response {
                 response = new Response();
             }
             if (isBuild) {
-                throw new IllegalStateException("build response only one time");
+                throw new IllegalStateException("build a Response only one time");
             }
             response.addYoutubeRecord(youtubeRecordID, viewCount);
             return this;

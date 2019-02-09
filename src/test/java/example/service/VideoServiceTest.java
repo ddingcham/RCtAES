@@ -30,6 +30,7 @@ public class VideoServiceTest {
         doReturn(3L)
                 .when(videoService)
                 .calculateDaysAvailable(any());
+        //TODO : 조임지점 VideoService -> YoutubeConnection (DI 없이 어케 만들지)
         doReturn(stubCallYoutube())
                 .when(youtubeConnection)
                 .callYoutube(any());
@@ -45,12 +46,8 @@ public class VideoServiceTest {
         return JSONUtils.dump(fixturedVideos());
     }
 
-    private Response stubCallYoutube() {
-        return Response.builder()
-                .with(1, 0)
-                .with(2, 1)
-                .with(3, 2)
-                .build();
+    private String stubCallYoutube() {
+        return "";
     }
 
     private Videos stubReadVideoMeta() {

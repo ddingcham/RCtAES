@@ -18,13 +18,12 @@ public class VideoService {
     public String getVideos() {
         Videos videos = readVideoMeta();
         YoutubeIDs youtubeIDs = videos.getVideoIDs();
-        Response response = new YoutubeConnection().callYoutube(youtubeIDs);
+        Response response = JSONUtils.parseToResponse(new YoutubeConnection().callYoutube(youtubeIDs));
 
         Arrays.stream(youtubeIDs.toArray())
                 .forEach(youtubeID -> {
                     Video video = videos.findById(youtubeID);
                     YoutubeRecord youtubeRecord = response.findById(youtubeID);
-                    //TODO -> viewCount
                     video.setViewCount(youtubeRecord.getStatistics().getViewCount());
                     long daysAvailable = calculateDaysAvailable(youtubeRecord.getSnippet().getPublishedAt());
                     video.setMonthlyViewCount(video.getViewCount() * 365.0 / daysAvailable / 12);
