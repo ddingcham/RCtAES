@@ -30,10 +30,10 @@ public class VideoServiceTest {
         doReturn(3L)
                 .when(videoService)
                 .calculateDaysAvailable(any());
-        //TODO : 조임지점 VideoService -> YoutubeConnection (DI 없이 어케 만들지)
         doReturn(stubCallYoutube())
                 .when(youtubeConnection)
                 .callYoutube(any());
+        videoService.setYoutubeConnection(youtubeConnection);
         String actual = videoService.getVideos();
 
         System.out.println("actual(videos) : " + actual);

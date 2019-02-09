@@ -5,6 +5,7 @@ import example.external.supports.Response;
 import example.model.*;
 import example.supports.FileUtils;
 import example.supports.JSONUtils;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -15,10 +16,14 @@ import java.util.Arrays;
     and then return the data in JSONUtils.
  */
 public class VideoService {
+
+    @Setter
+    private YoutubeConnection youtubeConnection;
+
     public String getVideos() {
         Videos videos = readVideoMeta();
         YoutubeIDs youtubeIDs = videos.getVideoIDs();
-        Response response = JSONUtils.parseToResponse(new YoutubeConnection().callYoutube(youtubeIDs));
+        Response response = JSONUtils.parseToResponse(youtubeConnection.callYoutube(youtubeIDs));
 
         Arrays.stream(youtubeIDs.toArray())
                 .forEach(youtubeID -> {
